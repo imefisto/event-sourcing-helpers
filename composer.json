@@ -1,0 +1,19 @@
+{
+    "name": "imefisto/event-sourcing-helpers",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Imefisto\\ESHelpers\\": "src"
+        }
+    }                                        },
+    "require": {
+        "carlosbuenosvinos/ddd": "^1.6",
+        "mathiasverraes/classfunctions": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "Ignacio El Kadre",
+            "email": "imefisto@gmail.com"
+        }
+    ]
+}
