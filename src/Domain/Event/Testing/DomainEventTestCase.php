@@ -2,6 +2,7 @@
 namespace Imefisto\ESHelpers\Domain\Event\Testing;
 
 use Ddd\Domain\DomainEventPublisher;
+use Imefisto\ESHelpers\Domain\Event\DomainEventAllListener;
 
 abstract class DomainEventTestCase extends \PHPUnit\Framework\TestCase
 {
