@@ -1,13 +1,18 @@
 <?php
 namespace Imefisto\ESHelpers\Domain\Event;
 
+use Imefisto\ESHelpers\Domain\Event\EventStore;
+
 class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
 {
-    public $events = [];
+    public function __construct(EventStore $eventStore)
+    {
+        $this->eventStore = $eventStore;
+    }
 
     public function handle($aDomainEvent)
     {
-        $this->events[] = $aDomainEvent;
+        $this->eventStore->append($aDomainEvent);
     }
 
     public function isSubscribedTo($aDomainEvent)
@@ -30,7 +35,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
     {
         $count = $this->countEvents();
         return $count > 0 && $pos < $count
-            ? $this->events[$pos]
+            ? $this->eventStore->events[$pos]
             : null
             ;
     }
@@ -38,7 +43,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
     public function getEventsOfInstance($className)
     {
         return array_filter(
-            $this->events,
+            $this->eventStore->events,
             function ($e) use ($className) {
                 return get_class($e) == $className;
             }
@@ -47,7 +52,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
 
     public function countEvents()
     {
-        return count($this->events);
+        return count($this->eventStore->events);
     }
 
     public function countEventsOfInstance($className)
