@@ -18,6 +18,11 @@ abstract class DomainEventTestCase extends \PHPUnit\Framework\TestCase
         );
     }
 
+    protected function tearDown(): void
+    {
+        DomainEventPublisher::instance()->unsubscribe($this->listenerId);
+    }
+
     protected function getListener()
     {
         return DomainEventPublisher::instance()->ofId($this->listenerId);

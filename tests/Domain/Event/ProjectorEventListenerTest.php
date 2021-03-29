@@ -21,13 +21,19 @@ class ProjectorEventListenerTest extends \PHPUnit\Framework\TestCase
             }
         };
 
-        DomainEventPublisher::instance()->subscribe(
+        $this->subscriptionId = DomainEventPublisher::instance()->subscribe(
             new ProjectorEventListener($this->projector)
         );
     }
 
+    protected function tearDown(): void
+    {
+        DomainEventPublisher::instance()->unsubscribe($this->subscriptionId);
+    }
+
     /**
      * @test
+     * @covers Imefisto\ESHelpers\Domain\Event\DomainEvent::__construct
      */
     public function testProjection()
     {
