@@ -3,7 +3,8 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Imefisto\\ESHelpers\\": "src"
+            "Imefisto\\ESHelpers\\": "src",
+            "Imefisto\\ESHelpers\\Testing\\": "tests"
         }
     },
     "scripts": {
