@@ -5,9 +5,8 @@ use Verraes\ClassFunctions\ClassFunctions;
 
 class ProjectorEventListener implements \Ddd\Domain\DomainEventSubscriber
 {
-    public function __construct($projector)
+    public function __construct(private readonly mixed $projector)
     {
-        $this->projector = $projector;
     }
 
     public function handle($aDomainEvent)

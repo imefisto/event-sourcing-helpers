@@ -35,7 +35,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
     {
         $count = $this->countEvents();
         return $count > 0 && $pos < $count
-            ? $this->eventStore->events[$pos]
+            ? $this->eventStore->allStoredEventsSince()[$pos]
             : null
             ;
     }
@@ -43,7 +43,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
     public function getEventsOfInstance($className)
     {
         return array_filter(
-            $this->eventStore->events,
+            $this->eventStore->allStoredEventsSince(),
             function ($e) use ($className) {
                 return get_class($e) == $className;
             }
@@ -52,7 +52,7 @@ class DomainEventAllListener implements \Ddd\Domain\DomainEventSubscriber
 
     public function countEvents()
     {
-        return count($this->eventStore->events);
+        return count($this->eventStore->allStoredEventsSince());
     }
 
     public function countEventsOfInstance($className)
