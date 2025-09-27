@@ -5,9 +5,8 @@ use Imefisto\ESHelpers\Domain\Event\EventStore;
 
 class InMemoryEventStore implements EventStore
 {
-    public function __construct(array $events = [])
+    public function __construct(private array $events = [])
     {
-        $this->events = $events;
     }
 
     public function append($aDomainEvent)

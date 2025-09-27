@@ -6,10 +6,14 @@ use Ddd\Domain\Event\PublishableDomainEvent;
 
 abstract class DomainEvent implements PublishableDomainEvent, BaseDomainEvent
 {
-    public function __construct($aggregateId, $payload = [], $occurredOn = null)
-    {
-        $this->aggregateId = $aggregateId;
-        $this->payload = $payload;
+
+    private readonly \DateTimeImmutable $occurredOn;
+
+    public function __construct(
+        private readonly string $aggregateId,
+        private readonly array $payload = [],
+        ?\DateTimeImmutable $occurredOn = null
+    ) {
         $this->occurredOn = !is_null($occurredOn)
             ? $occurredOn
             : new \DateTimeImmutable
